@@ -16,10 +16,10 @@ body {
 .cloud {
     position: absolute;
     background: white;
-    border-radius: 50px;
-    opacity: 0.7;
+    border-radius: 60px;
     animation: float 40s linear infinite;
     z-index: 1;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
 }
 
 /* รูปทรงเมฆ */
@@ -32,13 +32,61 @@ body {
 }
 
 .cloud::before {
-    width: 60px;
-    height: 60px;
-    top: -30px;
-    left: 20px;
+    width: 80px;
+    height: 80px;
+    top: -40px;
+    left: 40px;
 }
 
 .cloud::after {
-    width: 80px;
-    height: 80px
+    width: 100px;
+    height: 100px;
+    top: -50px;
+    right: 40px;
+}
+
+/* ลอย */
+@keyframes float {
+    from { left: -400px; }
+    to { left: 100%; }
+}
+
+/* ข้อความในเมฆ */
+.cloud-content {
+    position: relative;
+    z-index: 2;
+    padding: 35px 50px;
+    text-align: center;
+}
+
+.to {
+    color: #ff4f7b;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.message {
+    color: #333;
+    font-size: 22px;
+    line-height: 1.6;
+    word-break: break-word;
+}
+</style>
+</head>
+
+<body>
+
+<!-- เมฆตัวอย่าง -->
+<div class="cloud" style="width:350px; height:140px; top:120px;">
+    <div class="cloud-content">
+        <div class="to">TO นายอนนท์ กฤษ</div>
+        <div class="message">ยยยยยยยยยยยยย</div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
 

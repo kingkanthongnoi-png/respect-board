@@ -1,30 +1,97 @@
-<script>
-const apiURL = "https://script.google.com/macros/s/AKfycbwf-kY_y0PWE_5ZBJIhRFhCA5IO17Ieok9YOU6vMFYbLzAPr5x5Dt87UJdokFS9Si34kg/exec";
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Respect Balloon 💙</title>
 
-async function loadMessages() {
-  const res = await fetch(apiURL);
-  const data = await res.json();
-
-  document.querySelectorAll(".balloon").forEach(b => b.remove());
-
-  data.reverse().forEach((row, i) => {
-    const balloon = document.createElement("div");
-    balloon.className = "balloon";
-    balloon.style.left = (10 + (i * 20) % 80) + "%";
-    balloon.style.animationDuration = (22 + i * 3) + "s";
-
-    balloon.innerHTML = `
-      <div class="balloon-content">
-        <div class="to">TO ${row.to}</div>
-        <div class="message">${row.message}</div>
-      </div>
-      <div class="basket"></div>
-    `;
-
-    document.body.appendChild(balloon);
-  });
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  height: 100vh;
+  background: linear-gradient(#dff3ff, #ffffff);
+  font-family: "Prompt", sans-serif;
 }
 
-loadMessages();
-setInterval(loadMessages, 10000); // รีเฟรชทุก 10 วิ
+/* บอลลูน */
+.balloon {
+  position: absolute;
+  width: 220px;
+  height: 300px;
+  background: linear-gradient(#79c2f2, #4fa3dd);
+  border-radius: 50% 50% 45% 45%;
+  animation: floatUp linear infinite;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* เชือก */
+.balloon::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 30px;
+  background: #4fa3dd;
+}
+
+/* กล่องข้อความ */
+.content {
+  position: absolute;
+  inset: 40px 20px;
+  background: white;
+  border-radius: 20px;
+  padding: 15px;
+  text-align: center;
+}
+
+.to {
+  color: #ff4f7b;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.message {
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+@keyframes floatUp {
+  from { top: 110%; }
+  to { top: -400px; }
+}
+</style>
+</head>
+
+<body>
+
+<script>
+const API_URL = "ใส่ Web App URL ของคุณตรงนี้";
+
+fetch(API_URL)
+  .then(res => res.json())
+  .then(data => {
+    data.forEach(item => createBalloon(item));
+  });
+
+function createBalloon(item) {
+  const balloon = document.createElement("div");
+  balloon.className = "balloon";
+
+  balloon.style.left = Math.random() * 80 + "%";
+  balloon.style.animationDuration = 20 + Math.random() * 10 + "s";
+
+  balloon.innerHTML = `
+    <div class="content">
+      <div class="to">TO ${item.to}</div>
+      <div class="message">${item.message}</div>
+    </div>
+  `;
+
+  document.body.appendChild(balloon);
+}
 </script>
+
+</body>
+</html>

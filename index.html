@@ -12,39 +12,44 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* เมฆ */
+/* กล่องเมฆ */
 .cloud {
     position: absolute;
-    background: white;
-    border-radius: 60px;
+    width: 350px;
+    height: 160px;
     animation: float 40s linear infinite;
-    z-index: 1;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-    padding-top: 40px; /* 🔴 เพิ่มบรรทัดนี้ */
 }
 
+/* ตัวเมฆจริง */
+.cloud-body {
+    position: absolute;
+    inset: 0;
+    background: white;
+    border-radius: 80px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
 
-/* รูปทรงเมฆ */
-.cloud::before,
-.cloud::after {
+/* ปุยเมฆ */
+.cloud-body::before,
+.cloud-body::after {
     content: '';
     position: absolute;
     background: white;
     border-radius: 50%;
 }
 
-.cloud::before {
-    width: 80px;
-    height: 80px;
+.cloud-body::before {
+    width: 90px;
+    height: 90px;
     top: -40px;
-    left: 40px;
+    left: 60px;
 }
 
-.cloud::after {
-    width: 100px;
-    height: 100px;
-    top: -50px;
-    right: 40px;
+.cloud-body::after {
+    width: 120px;
+    height: 120px;
+    top: -60px;
+    right: 50px;
 }
 
 /* ลอย */
@@ -53,20 +58,24 @@ body {
     to { left: 100%; }
 }
 
-/* ข้อความในเมฆ */
+/* ข้อความ */
 .cloud-content {
-    position: relative;
-    z-index: 2;
-    padding: 20px 50px 35px;
+    position: absolute;
+    inset: 0;
+    z-index: 2;              /* 🔥 อยู่เหนือเมฆ */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
     text-align: center;
 }
-
 
 .to {
     color: #ff4f7b;
     font-weight: bold;
     font-size: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .message {
@@ -81,7 +90,9 @@ body {
 <body>
 
 <!-- เมฆตัวอย่าง -->
-<div class="cloud" style="width:350px; height:140px; top:120px;">
+<div class="cloud" style="top:120px;">
+    <div class="cloud-body"></div>
+
     <div class="cloud-content">
         <div class="to">TO นายอนนท์ กฤษ</div>
         <div class="message">ยยยยยยยยยยยยย</div>
@@ -90,6 +101,8 @@ body {
 
 </body>
 </html>
+
+
 
 
 

@@ -1,110 +1,115 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>Respect Board</title>
+<title>Respect Board 🎈</title>
 
 <style>
 body {
     margin: 0;
+    height: 100vh;
     overflow: hidden;
-    background: linear-gradient(to bottom, #87CEFA, #ffffff);
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #eaf7ff 0%, #ffffff 70%);
 }
 
-/* กล่องเมฆ */
-.cloud {
-    position: absolute;
-    width: 350px;
-    height: 160px;
-    animation: float 40s linear infinite;
-}
-
-/* ตัวเมฆจริง */
-.cloud-body {
-    position: absolute;
+/* พื้นหลังคลื่น */
+.bg {
+    position: fixed;
     inset: 0;
-    background: white;
-    border-radius: 80px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    z-index: -2;
+    background:
+      linear-gradient(to bottom, #eaf7ff 0%, #ffffff 70%);
 }
 
-/* ปุยเมฆ */
-.cloud-body::before,
-.cloud-body::after {
+/* บอลลูน */
+.balloon {
+    position: absolute;
+    width: 260px;
+    height: 340px;
+    background: linear-gradient(to bottom, #8fd3ff, #5aaee6);
+    border-radius: 50% 50% 45% 45%;
+    animation: floatUp 25s linear infinite;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* หางบอลลูน */
+.balloon::after {
     content: '';
     position: absolute;
-    background: white;
-    border-radius: 50%;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 30px;
+    background: #5aaee6;
+    border-radius: 0 0 10px 10px;
 }
 
-.cloud-body::before {
-    width: 90px;
-    height: 90px;
-    top: -40px;
-    left: 60px;
-}
-
-.cloud-body::after {
-    width: 120px;
-    height: 120px;
-    top: -60px;
-    right: 50px;
-}
-
-/* ลอย */
-@keyframes float {
-    from { left: -400px; }
-    to { left: 100%; }
-}
-
-/* ข้อความ */
-.cloud-content {
+/* ตะกร้า */
+.basket {
     position: absolute;
-    inset: 0;
-    z-index: 2;              /* 🔥 อยู่เหนือเมฆ */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 30px;
+    bottom: -55px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 35px;
+    background: #f2c38b;
+    border-radius: 8px;
+}
+
+/* เนื้อหาในบอลลูน */
+.balloon-content {
+    position: absolute;
+    inset: 40px 25px 80px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 25px;
+    padding: 20px;
     text-align: center;
 }
 
 .to {
-    color: #ff4f7b;
     font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 8px;
+    color: #ff4f7b;
+    margin-bottom: 10px;
+    font-size: 18px;
 }
 
 .message {
+    font-size: 20px;
     color: #333;
-    font-size: 22px;
-    line-height: 1.6;
-    word-break: break-word;
+    line-height: 1.5;
+}
+
+/* animation */
+@keyframes floatUp {
+    from { top: 110%; }
+    to { top: -450px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- เมฆตัวอย่าง -->
-<div class="cloud" style="top:120px;">
-    <div class="cloud-body"></div>
+<div class="bg"></div>
 
-    <div class="cloud-content">
-        <div class="to">TO นายอนนท์ กฤษ</div>
-        <div class="message">ยยยยยยยยยยยยย</div>
+<!-- บอลลูน 1 -->
+<div class="balloon" style="left:10%; animation-duration:30s;">
+    <div class="balloon-content">
+        <div class="to">TO พี่อนนท์</div>
+        <div class="message">ขอบคุณที่ช่วยทีมเสมอ 💙</div>
     </div>
+    <div class="basket"></div>
+</div>
+
+<!-- บอลลูน 2 -->
+<div class="balloon" style="left:55%; animation-duration:26s;">
+    <div class="balloon-content">
+        <div class="to">TO ทุกคน</div>
+        <div class="message">สู้ ๆ นะ เราเก่งมากแล้ว 🎉</div>
+    </div>
+    <div class="basket"></div>
 </div>
 
 </body>
 </html>
-
-
-
-
-
-
-

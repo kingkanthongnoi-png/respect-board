@@ -1,72 +1,30 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-<meta charset="UTF-8">
-<title>Respect Board 🎈</title>
+<script>
+const apiURL = "https://script.google.com/macros/s/AKfycbwf-kY_y0PWE_5ZBJIhRFhCA5IO17Ieok9YOU6vMFYbLzAPr5x5Dt87UJdokFS9Si34kg/exec";
 
-<style>
-body{
-  margin:0;
-  height:100vh;
-  background: linear-gradient(#eaf7ff, #ffffff);
-  overflow:hidden;
-  font-family: Arial, sans-serif;
+async function loadMessages() {
+  const res = await fetch(apiURL);
+  const data = await res.json();
+
+  document.querySelectorAll(".balloon").forEach(b => b.remove());
+
+  data.reverse().forEach((row, i) => {
+    const balloon = document.createElement("div");
+    balloon.className = "balloon";
+    balloon.style.left = (10 + (i * 20) % 80) + "%";
+    balloon.style.animationDuration = (22 + i * 3) + "s";
+
+    balloon.innerHTML = `
+      <div class="balloon-content">
+        <div class="to">TO ${row.to}</div>
+        <div class="message">${row.message}</div>
+      </div>
+      <div class="basket"></div>
+    `;
+
+    document.body.appendChild(balloon);
+  });
 }
 
-.balloon{
-  position:absolute;
-  left:50%;
-  top:30%;
-  transform:translateX(-50%);
-  width:260px;
-  height:340px;
-  background: linear-gradient(to bottom,#8fd3ff,#5aaee6);
-  border-radius:55% 55% 45% 45%;
-  box-shadow:0 20px 40px rgba(0,0,0,.2);
-}
-
-.balloon::after{
-  content:'';
-  position:absolute;
-  bottom:-25px;
-  left:50%;
-  transform:translateX(-50%);
-  width:18px;
-  height:28px;
-  background:#5aaee6;
-  border-radius:0 0 10px 10px;
-}
-
-.content{
-  position:absolute;
-  inset:40px 25px 90px;
-  background:white;
-  border-radius:25px;
-  padding:20px;
-  text-align:center;
-}
-
-.to{
-  color:#ff4f7b;
-  font-weight:bold;
-  font-size:18px;
-  margin-bottom:10px;
-}
-
-.msg{
-  font-size:20px;
-}
-</style>
-</head>
-
-<body>
-
-<div class="balloon">
-  <div class="content">
-    <div class="to">TO นายอนนท์ กฤษ</div>
-    <div class="msg">ขอบคุณที่ช่วยเหลือเสมอ 💙</div>
-  </div>
-</div>
-
-</body>
-</html>
+loadMessages();
+setInterval(loadMessages, 10000); // รีเฟรชทุก 10 วิ
+</script>
